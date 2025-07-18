@@ -42,7 +42,7 @@
 	// Environment variables to set in the container.
 	"containerEnv": {
 		"TZ": "America/New_York"
-	},
+	}
 	
 	// Use 'postCreateCommand' to run commands after the container is created.
 
