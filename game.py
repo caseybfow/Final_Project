@@ -6,7 +6,7 @@ balance = 1000
 cont = False
 iterationCount = 0
 def slot_machine():
-    global balance
+    global balance, cont
     if balance >= 10000 and cont == False:
         write_md(
             f"""
@@ -105,8 +105,7 @@ go home a millionaire! The opporutunities are endless and you just know you are 
     return main_hall
 
 def main_hall():
-    global balance
-    global iterationCount
+    global balance, iterationCount, cont
     iterationCount += 1
     if balance >= 10000 and cont == False:
         write_md(
@@ -156,7 +155,8 @@ on every bet
         "Slots",
         "Blackjack",
         "Roulette",
-        "View Wallet"
+        "View Wallet",
+        "Go Home (End Game)"
     ]
     user_choice = get_choice(choices)
     if user_choice == 0:
@@ -167,12 +167,14 @@ on every bet
         return black_jack
     elif user_choice == 3:
         return roulette
-    else:
+    elif user_choice == 4:
         write()
         show_wallet()
         write()
         pause()
         return main_hall
+    else:
+        return home
 def poker():
     global balance
     if balance <= 0:
@@ -463,6 +465,10 @@ def roulette_game():
         color = ['⬛','⬛','⬛','🟥']
         pickcolor = random.choice(color)
         if pickcolor == '🟥':
+            write()
+            write("You picked 🟥 and the wheel landed on 🟥")
+            write()
+            pause()
             balance = balance + balance
             write_md(
                 f"""
@@ -471,13 +477,17 @@ def roulette_game():
 Congratulations! Despite the seemingly rigged game you managed to win and doubled your money!
 You now feel a rush of happiness cause you were able to overcome the scammers at this casino.
 
-New Balance: {balance}
+New Balance: **{balance}**
                 """
             )
             write()
             pause("Press any key to return to the main hall...")
             return main_hall
         elif pickcolor == '⬛':
+            write()
+            write("You picked 🟥 and the wheel landed on ⬛")
+            write()
+            pause()
             balance = balance -250
             write_md(
                 f"""
@@ -487,16 +497,20 @@ Aww man you thought this was a fair game but it kind of looks like its rigged no
 Welp theres always next time and maybe you will really win it big just remember dont
 *ever QUIT!*
 
-New Balance: {balance}
+New Balance: **{balance}**
                 """
             )
             write()
-            pause("Press any key to return to the main hall")
+            pause("Press any key to return to the main hall...")
             return main_hall
     elif user_choice == 1:
         color = ['🟥','🟥','🟥','⬛']
         pickcolor = random.choice(color)
         if pickcolor == '⬛':
+             write()
+             write("You picked ⬛ and the wheel landed on ⬛")
+             write()
+             pause()
              balance = balance + balance
              write_md(
                 f"""
@@ -505,13 +519,17 @@ New Balance: {balance}
 Congratulations! Despite the seemingly rigged game you managed to win and doubled your money!
 You now feel a rush of happiness cause you were able to overcome the scammers at this casino.
 
-New Balance: {balance}
+New Balance: **{balance}**
                 """
             )
              write()
              pause("Press any key to return to the main hall...")
              return main_hall
         elif pickcolor == '🟥':
+            write()
+            write("You picked ⬛ and the wheel landed on 🟥")
+            write()
+            pause()
             balance = balance -250
             write_md(
                 f"""
@@ -521,11 +539,11 @@ Aww man you thought this was a fair game but it kind of looks like its rigged no
 Welp theres always next time and maybe you will really win it big just remember dont
 *ever QUIT!*
 
-New Balance: {balance}
+New Balance: **{balance}**
                 """
             )
             write()
-            pause("Press any key to return to the main hall")
+            pause("Press any key to return to the main hall...")
             return main_hall
     elif user_choice == 2:
         return main_hall
@@ -582,20 +600,108 @@ force it and grab it then run for your life. What to do...
         pause()
         return broke_balance
 def ending_1():
-    write_md(
+    write(
         """
+You notice an empty liquor bottle just to your left and think to throw it in the direction
+of a poker table to get securities attention,
         """
     )
+    write()
+    write(
+        """
+You go to grab the bottle and it reads [bold red]'DO NOT CONSUME'[/] huh must be an edgy brand label for 
+die hard drinkers, anyways you dont think much of it and get ready to throw it into the crowd
+of gamblers to lure the guards away from the [bold green]$Money$[/]
+        """
+    )
+    write()
+    pause("Press any key to throw the BOTTLE...")
+    write(
+        """
+You throw the bottle over towards the gamblers and it hits a guy whos about to light a cigar in his hand
+the liquid gets everywhere and out of no where flames erupt all around him and the table! [bold #FFA500]ITS A FIRE![/]
+        """
+    )
+    write()
+    write(
+        """
+It begins to spread quickly and you now realize that you ****** up big time! No need to try and get any money
+anymore you just need to secure your freedom and bolt out of there as quickly as you can hoping nobody got wind 
+that *you* were the one who threw the bottle...
+        """
+    )
+    write()
+    write(
+        """
+You arrive home late at night as you wanted to make sure nobody was able to trail you and after a long day of gambling
+and unfortunately no winning you decide to call it a night and consider some new hobbies cause theres no way you are returning
+to that casino anytime soon...
+        """
+    )
+    write()
+    write(
+        """
+[bold #FFA500]GAME OVER! YOU CAUSED HAVOC AND WON NOTHING[/]
+        """
+    )
+    exit()
 def ending_2():
+    balance = random.randint(1000,100000)
     write_md(
         """
+You **CHARGE** towards the guards with no regrets in sight! The first two dive for your legs but you
+hurdle them making them crash into somebodies slot machine knocking them out! You inch closer and closer
+but as you do the guards keep coming
+
+Two more are on your left and three are on your right you decide to zip past them all and try to grab as 
+much money as possible while they all knock into each other dazzing one another! As you are grabbing the cash
+you realize the guards are back on their feet and it might be time to dip now!
         """
     )
+    write()
+    pause("Press any key to see what happens next...")
+    write_md(
+        """
+You start running for your life towards the exit but now **ALARMS** are sounding and metal doors appear before the 
+exit slowly inching closer to closing! This isnt good you begin to sprint as fast as you can with the guards hot on 
+your trail! The door is *ALMOST* closed you HAVE to slide to make it!
+
+You slide and the door *SLAMS* shut leaving the guards on the other side and some of the money you took alongside them!
+**FREEDOM** you dart home as soon as possible to count your winnings from the casino!
+        """
+    )
+    write_md(
+        """
+# 🏠 HOME
+        """
+    )
+    write(
+        f"""
+Congratulations! You managed to scam the casino more than they could scam you! After counting the money you
+[bold italic]won[/] you realize you managed to get a [bold]GRAND TOTAL[/] of [green]{balance:,}[/]!
+        """
+    )
+    write(
+        """
+[bold green]THANKS FOR PLAYING![/]
+        """
+    )
+    exit()
 def ending_3():
     write_md(
         """
+# 🏠HOME
+
+You arrive back at your house empty handed with nothing to show for your efforts,
+your wife is yelling at you and the kids are hungry. You just plop down in your 
+trusty chair and begin to drift off into you dreams hoping to win it big some day
+
+However, you vow to **NEVER** quit gambling because you *ARE* the **1%**
         """
     )
+    write()
+    write("[bold red]GAME OVER YOU WON NOTHING[/]")
+    exit()
 def happy_ending():
     global balance
     write_md(
@@ -607,6 +713,21 @@ Now what to do with all this money... Well that's for you to
 decide!
 
 Thanks for playing!
+        """
+    )
+    exit()
+def home():
+    global balance
+    write_md(
+        """
+# 🏠 HOME """)
+    write(
+        f"""
+Well you decided to go home and keep the money you managed to make or just decided to cut your
+losses and at least be able to feed the kids, You came home with a grand total of [green]{balance}[/green]
+so dont feel so bad about yourself!
+
+[red]GAME OVER![/red] Thanks for playing!
         """
     )
     exit()
